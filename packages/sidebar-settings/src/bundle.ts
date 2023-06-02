@@ -1,10 +1,6 @@
 /* (c) Copyright Frontify Ltd., all rights reserved. */
 
-import type { SettingBlock } from './blocks';
-
-export type SettingValue<AppBridge> = {
-    value?: SettingBlock<AppBridge>['value'];
-};
+import type { SettingBlock, SettingValue } from './blocks';
 
 export type Bundle<AppBridge> = {
     /**
@@ -12,7 +8,7 @@ export type Bundle<AppBridge> = {
      * @param id Represent the setting id.
      * @returns The value of the setting.
      */
-    getBlock: (id: string) => SettingValue<AppBridge> | null;
+    getBlock: (id: string) => { value?: SettingValue<AppBridge> } | null;
 
     /**
      * A function that returns an instance of the App Bridge.

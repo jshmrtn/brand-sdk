@@ -21,6 +21,7 @@ import type {
     SectionHeadingBlock as SectionHeadingBlockSidebarSettings,
     SegmentedControlsBlock as SegmentedControlsBlockSidebarSettings,
     SettingBlock as SettingBlockSidebarSettings,
+    SettingConfig as SettingConfigSidebarSettings,
     SimpleSettingBlock as SimpleSettingBlockSidebarSettings,
     SwitchBlock as SwitchBlockSidebarSettings,
     TemplateInputBlock as TemplateInputBlockSidebarSettings,
@@ -117,5 +118,7 @@ export const defineBlock = (config: BlockConfigExport): BlockConfigExport => con
 /**
  * Type helper to make it easier to export block's settings structure, accepts a direct {@link BlockSettingsStructureExport} object.
  */
-export const defineSettings = (settingsStructure: BlockSettingsStructureExport): BlockSettingsStructureExport =>
-    settingsStructure;
+export const defineSettings = <T extends BlockSettingsStructureExport>(settingsStructure: T): T => settingsStructure;
+
+export type SettingConfig<T extends SettingBlock = SettingBlock> = SettingConfigSidebarSettings<AppBridgeBlock, T>;
+export type SettingValue<T extends SettingBlock = SettingBlock> = SettingConfig<T>['value'];

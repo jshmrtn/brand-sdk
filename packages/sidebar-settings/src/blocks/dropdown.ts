@@ -3,7 +3,7 @@
 import type { DropdownSize } from '.';
 import type { ChoicesType } from './choices';
 
-export type DropdownBlock<AppBridge> = {
+export type DropdownBlock<AppBridge, T extends string | number = string | number> = {
     /**
      * The setting type.
      */
@@ -30,4 +30,4 @@ export type DropdownBlock<AppBridge> = {
      * It will set the value of the setting to `null` when clicked.
      */
     clearable?: boolean;
-} & ChoicesType<AppBridge>;
+} & ChoicesType<AppBridge, T>;

@@ -112,10 +112,23 @@ export type DynamicSettingBlock<
     AppBridge,
     T extends DynamicSupportedBlock<AppBridge> = DynamicSupportedBlock<AppBridge>
 > = UnionOmit<T, 'value'> & {
-    value?: DynamicSupportedBlock<AppBridge>['value'][];
+    value?: T['value'][];
     dynamic: {
         addButtonLabel: string;
     };
 };
 
-export type SettingBlock<AppBridge> = SimpleSettingBlock<AppBridge> | DynamicSettingBlock<AppBridge>;
+export type SettingBlock<AppBridge> =
+    | SimpleSettingBlock<AppBridge>
+    | DynamicSettingBlock<AppBridge, InputBlock<AppBridge>>
+    | DynamicSettingBlock<AppBridge, ColorInputBlock<AppBridge>>
+    | DynamicSettingBlock<AppBridge, DropdownBlock<AppBridge>>;
+
+export type SettingConfig<AppBridge, T extends SettingBlock<AppBridge> = SettingBlock<AppBridge>> = Extract<
+    SettingBlock<AppBridge>,
+    T
+>;
+export type SettingValue<AppBridge, T extends SettingBlock<AppBridge> = SettingBlock<AppBridge>> = SettingConfig<
+    AppBridge,
+    T
+>['value'];
